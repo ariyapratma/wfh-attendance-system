@@ -33,3 +33,9 @@ This project consists of two main parts:
 *   **Axios** (HTTP Client)
 
 ## Project Structure
+wfh-attendance-system/
+├── services/
+│ ├── user-service/ # Authentication service (login)
+│ ├── employee-service/ # Employee data service (CRUD)
+│ └── attendance-service/ # Attendance service (check-in, check-out, photo upload)
+├── client/ # React frontend
