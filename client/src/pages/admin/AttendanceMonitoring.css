@@ -1,0 +1,49 @@
+.admin-attendance-monitoring {
+    min-height: 100vh;
+    background-color: #f9fafb;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-attendance-monitoring-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-attendance-monitoring h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+}
+
+.admin-attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.admin-attendance-table th,
+.admin-attendance-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-attendance-table th {
+    background-color: #f3f4f6;
+    font-weight: 500;
+    color: #374151;
+}
+
+.admin-attendance-table td {
+    color: #4b5563;
+    vertical-align: middle;
+}
+
+.admin-attendance-table img {
+    border-radius: 0.25rem;
+}
