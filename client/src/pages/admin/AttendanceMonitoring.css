@@ -10,6 +10,21 @@
     margin: 0 auto;
 }
 
+.admin-attendance-monitoring-breadcrumb {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.admin-attendance-monitoring-breadcrumb a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.admin-attendance-monitoring-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
 .admin-attendance-monitoring h2 {
     font-size: 1.8rem;
     font-weight: 600;

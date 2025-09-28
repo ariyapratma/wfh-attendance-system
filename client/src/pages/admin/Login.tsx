@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { login } from '../../services/authService';
 import { User } from '../../types/User';
 import './Login.css';
+import Swal from 'sweetalert2';
 
 const AdminLogin: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -23,8 +24,18 @@ const AdminLogin: React.FC = () => {
         localStorage.setItem('user', JSON.stringify(userData));
         if (userData.role === 'admin') {
           navigate('/admin/dashboard');
+          Swal.fire({
+            icon: 'success',
+            title: 'Login Successful!',
+            text: `Welcome back, ${userData.username}!`,
+          });
         } else {
           setError('Invalid user role for admin login.');
+          Swal.fire({
+            icon: 'error',
+            title: 'Access Denied',
+            text: 'You do not have admin privileges.',
+          });
         }
       } else {
         setError('Invalid user role for admin login.');

@@ -10,6 +10,21 @@
     margin: 0 auto;
 }
 
+.admin-employee-breadcrumb {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.admin-employee-breadcrumb a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.admin-employee-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
 .admin-employee-management h2 {
     font-size: 1.8rem;
     font-weight: 600;

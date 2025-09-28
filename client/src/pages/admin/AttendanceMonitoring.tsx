@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAllAttendances } from '../../services/attendanceService';
 import { Attendance } from '../../types/Attendance';
 import './AttendanceMonitoring.css';
@@ -42,6 +42,9 @@ const AttendanceMonitoring: React.FC = () => {
   return (
     <div className="admin-attendance-monitoring">
       <div className="admin-attendance-monitoring-container">
+        <div className="admin-attendance-monitoring-breadcrumb">
+          <Link to="/admin/dashboard">Dashboard <span>/</span></Link> Attendance Monitoring
+        </div>
         <h2>Attendance Monitoring</h2>
         <table className="admin-attendance-table">
           <thead>

@@ -1,8 +1,9 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { checkIn, checkOut, getAttendanceByEmployeeId } from '../../services/attendanceService';
 import { Attendance } from '../../types/Attendance';
 import './Dashboard.css';
+import Swal from 'sweetalert2';
 
 const EmployeeDashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -65,8 +66,29 @@ const EmployeeDashboard: React.FC = () => {
       setPhoto(null);
       setPreviewUrl(null);
       fetchAttendanceHistory();
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Check-in Successful!',
+        text: `You have successfully checked in for ${date}.`,
+      });
     } catch (err) {
       console.error('Check-in failed:', err);
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred during check-in.';
+
+      if (errorMessage.includes('Already checked out for today')) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Check-in Blocked',
+          text: errorMessage,
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Check-in Failed',
+          text: 'Already checked out for today'
+        });
+      }
     }
     setLoading(false);
   };
@@ -93,19 +115,50 @@ const EmployeeDashboard: React.FC = () => {
       const updatedAttendance = await checkOut(attendance.id, { checkOutTime: time });
       setAttendance(updatedAttendance);
       fetchAttendanceHistory();
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Check-out Successful!',
+        text: `You have successfully checked out. Time: ${time}`,
+      });
     } catch (err) {
       console.error('Check-out failed:', err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Check-out Failed',
+        text: (err instanceof Error ? err.message : 'An error occurred during check-out.'),
+      });
     }
     setLoading(false);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    navigate('/employee/login');
+  const handleLogout = async () => {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You will be logged out of the employee panel.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout!',
+      cancelButtonText: 'Cancel',
+    });
+
+    if (result.isConfirmed) {
+      localStorage.removeItem('user');
+      navigate('/employee/login');
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Logged Out!',
+        text: 'You have been successfully logged out.',
+      });
+    }
   };
 
   if (!user || user.role !== 'employee') {
-    return <Navigate to="/employee/login" replace />;
+    navigate('/employee/login')
+    return null;
   }
 
   return (

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authService";
 import './Login.css';
+import Swal from "sweetalert2";
 
 const EmployeeLogin: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -20,8 +21,18 @@ const EmployeeLogin: React.FC = () => {
             localStorage.setItem('user', JSON.stringify(userData));
             if (userData.role === 'employee') {
                 navigate('/employees/dashboard');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful!',
+                    text: `Welcome back, ${userData.username}!`,
+                });
             } else {
-                setError('Invalid user role for employee login');
+                setError('Invalid role for employee login.');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Access Denied',
+                    text: 'You do not have employee privileges.',
+                });
             }
         } catch (err) {
             setError('Login failed. Please check your credentials.');

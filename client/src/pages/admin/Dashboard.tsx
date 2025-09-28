@@ -1,14 +1,34 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
+import Swal from 'sweetalert2';
 
 const AdminDashboard: React.FC = () => {
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        navigate('/admin/login');
+    const handleLogout = async () => {
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: "You will be logged out of the admin panel.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, logout!',
+            cancelButtonText: 'Cancel',
+        });
+
+        if (result.isConfirmed) {
+            localStorage.removeItem('user');
+            navigate('/admin/login');
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Logged Out!',
+                text: 'You have been successfully logged out.',
+            });
+        }
     };
 
     if (!user || user.role !== 'admin') {
