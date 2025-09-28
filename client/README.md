@@ -19,7 +19,7 @@ This application is built with a microservices architecture, where each service 
 
 1.  **Clone this repository**
 ```bash
-    git clone <your-repository-url>
+    git clone wfh-attendance-system
     cd wfh-attendance-system
     ```
 
