@@ -33,6 +33,3 @@ This project consists of two main parts:
 *   **Axios** (HTTP Client)
 
 ## Project Structure
-
-
-Translated with DeepL.com (free version)
